@@ -1,0 +1,6 @@
+import os;
+
+for i in xrange(100):
+	os.system("python Kmeans.py 2> err.out");
+	F = file("err.out","r");
+	

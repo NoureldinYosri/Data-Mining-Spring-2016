@@ -1,0 +1,24 @@
+for this project I implemented my own NB classifier (code in NB.py) after trying it several times I came to these conclusions
+
+1) due to the fact that some variance variables are very small resulting in NaNs in evaluating the exponetial of the gaussian destrubution ,I tried to replace these small values with eps (where eps is a relatively small number which doesn't cause NaNs) ,but the algorithm turned out to be very sensetive to changing that value
+
+2) then I thought maybe the problem is the scale of the input itself ... so I rescaled the input .. my multiplying each attribute by 10 and setting eps to 5 the algorithm became stable 
+
+3) the maximum accuracy my impelementation acheived was 58% ... while the accuracy of the NN is ~71% ... that huge difference made me wonder if there was a problem with my impelementation ... so I compared my my implementation's performance to that of python's famous sklearn's impelementation (GaussianNB) -code included - ... the results are quite close with sklearn's peak being ~63% (only 5% more than my impelementation)
+
+
+running time NB: 0.00279593467712 seconds
+running time Backprop : 43.5755839348 seconds
+
+NB accuracy : 56.92%
+Backprop acc: 70.77%
+
+below are the values of true negative ,fasle positive , false negative ,true positive recpectively for each class
+[53.84615384615385, 16.923076923076923, 9.230769230769232, 20.0]
+[61.53846153846154, 4.615384615384616, 24.615384615384617, 9.230769230769232]
+[81.53846153846155, 12.307692307692308, 4.615384615384616, 1.5384615384615385]
+[100.0, 0.0, 0.0, 0.0]
+[83.07692307692308, 7.6923076923076925, 1.5384615384615385, 7.6923076923076925]
+[92.3076923076923, 1.5384615384615385, 1.5384615384615385, 4.615384615384616]
+[84.61538461538461, 0.0, 1.5384615384615385, 13.846153846153847]
+

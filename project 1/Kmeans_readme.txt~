@@ -1,0 +1,8 @@
+the K-means algorithm is easy that's why I chose to code it instead of using any libraries ,I however use numpy for numerical calculations
+
+after reading the output of the algorithm of many trials I have these conclusions :
+1) the data is highly non-linear
+2) types 1:5 are very closely realted in terms of their geometries
+3) type 6 is almost completly halved into two parts .. one that is very close to 1:5 and another that is very close to type 7
+4) some of the points in type 2 form a cluster of their own that quite far from the other points of type 2
+5) like wise some points in types 1:5 form a cluster of their own	

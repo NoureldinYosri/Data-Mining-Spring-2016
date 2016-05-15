@@ -1,0 +1,18 @@
+
+
+def dist2(X,Y):
+	X = X - Y
+	return sum(X*X);
+
+def get_initial(X,k):
+	from random import randint;
+	n = len(X);
+	C = set();
+	while len(C) < k:
+		i = randint(0,n - 1);
+		if i not in C: C.add(i);
+	return [X[c] for c in C];
+
+def train(X,k):
+	C = get_initial(X,k);
+	while 
