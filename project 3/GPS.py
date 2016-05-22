@@ -3,8 +3,10 @@ import math,copy;
 class GPS_Point:
 	Latitude = Longitude = Altitude = ArrivalTimeInMinutes = LeavingTimeInMinutes = None;
 	EarthRadius = 6371000.0;
-			
-	def __init__(self,x):
+
+		
+	def __init__(self,x = None):
+		if x is None: return;
 		self.Latitude = x[0] * math.pi/180.0;
 		self.Longitude = x[1] * math.pi/180.0;
 		self.Altitude = x[3];
@@ -46,12 +48,18 @@ class Trajectory:
 	def __init__(self,X = []):
 		self.Path = X;
 	
-	def ReadTrajectory(self,path_to_file,id):
-		self.Who = id;
-		f = file(path_to_file,"r");
-		F = [line for line in f];
-		self.Path = [GPS_Point(map(float,line.split(",")[:5])) for line in F[6:]];
-		
+	def ReadTrajectory(self,path_to_file,ID):
+		try:		
+			self.Who = ID;
+			f = file(path_to_file,"r");	
+			F = [line for line in f];
+			self.Path = [GPS_Point(map(float,line.split(",")[:5])) for line in F[6:]];
+		except Exception as e:
+			raise e;
+	
+	def toString(self):
+		return [p.toString() for p in self.StayPoints];
+
 	def Process(self,DistanceThreshold,TimeThreshold,SmoothingParamter):
 		i,j,n = 0,0,len(self.Path);
 		self.StayPoints = [];
@@ -61,7 +69,7 @@ class Trajectory:
 				EndTime = self.Path[j].LeavingTimeInMinutes;
 				j += 1;
 			
-			if EndTime - StartTime >= TimeThreshold :
+			if EndTime - StartTime >= TimeThreshold or j == n:
 				while i < j :				
 					StayPoint = copy.deepcopy(self.Path[i]);
 					i += 1; TmpCnt = 1;
@@ -73,4 +81,4 @@ class Trajectory:
 					StayPoint.normalize(TmpCnt);
 					self.StayPoints.append(StayPoint);
 			i = j;
-				
+		
